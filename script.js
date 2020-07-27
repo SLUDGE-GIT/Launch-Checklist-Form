@@ -5,7 +5,7 @@ window.addEventListener("load", function () {
    fetch("https://handlers.education.launchcode.org/static/planets.json").then(function (response) {
       response.json().then(function (json) {
          const div = document.getElementById("missionTarget");
-         let index = 0;
+         let index = Math.floor(Math.random()*json.length);
          div.innerHTML = `<h2>Mission Destination</h2>
 <ol>
    <li>Name: ${json[index].name}</li>
@@ -16,10 +16,10 @@ window.addEventListener("load", function () {
 </ol>
 <img src="${json[index].image}">
 `;
-index = (index + 1) % json.length;
+// index = (index + 1) % json.length;
 
-      )};
-      )};
+      });
+   });
 
 
    let form = document.querySelector("form");
@@ -71,7 +71,8 @@ index = (index + 1) % json.length;
          else if (fuelLevelInput.value > 10000 && cargoMassInput.value <= 10000) {
             document.getElementById('launchStatus').innerHTML = `Shuttle is ready for launch`;
             document.getElementById('launchStatus').style.color = 'green';
-            // document.getElementById('faultyItems').style.visibility = 'hidden';
+            document.getElementById('faultyItems').style.visibility = 'visible';
+            console.log(event);
             event.preventDefault();
          }
       }
